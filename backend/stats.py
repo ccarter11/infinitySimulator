@@ -1,0 +1,1 @@
+#view and compare personal and global stats

@@ -1,0 +1,17 @@
+users should be able to submit words of length 3 or more 
+words from any language with a compatible 26 letter alphabet should be valid 
+users should not be allowed to select letters that do not follow a defined line of input
+users should be able to use right click to undo selections 
+a submited word should be checked for a valid word forwards and backwards
+users who are not logged in should be able to find words to contribute to the global statistics 
+users should be required to login with an email, password, and alias to track personal statistics
+a submit button should appear and activate after three letters have been successfully selected 
+a statistics page should display global and personal(if applicable) statistics
+statistics should include most frequently found words, longest words, users with most points
+
+
+phase1
+a very large (tbd) board should be generated each week for all players
+phase2
+an infinite board should be generated and maintained for all players
+
