@@ -1,28 +1,28 @@
-.venv/
+backend/.venv/
 
-*.pyc
-__pycache__/
+backend/*.pyc
+backend/__pycache__/
 
-instance/
+backend/instance/
 
 .pytest_cache/
 .coverage
-htmlcov/
+backend/htmlcov/
 
-dist/
-build/
+backend/dist/
+backend/build/
 *.egg-info/
 
 # dependencies
-/node_modules
-/.pnp
+/frontend/infsim/node_modules
+.pnp
 .pnp.js
 
 # testing
-/coverage
+/frontend/infsim//coverage
 
 # production
-/build
+/frontend/infsim//build
 
 # misc
 .DS_Store
@@ -31,6 +31,6 @@ build/
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/frontend/infsim/npm-debug.log*
+/frontend/infsim/yarn-debug.log*
+/frontend/infsim/yarn-error.log*

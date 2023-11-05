@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
+//a square
 
-class square extends Component {
+function square({val, xCord, yCord, state}){
     
 }
