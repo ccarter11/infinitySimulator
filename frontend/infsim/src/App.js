@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
 
 function App() {
   
   function Square({ value, x, y, selectFunc }) { 
-    const [state, setState] = useState(0);//ready/ active 
+   // const [state, setState] = useState(0);//ready/ active 
 
     // if (selected.length ===1){  //hook to update state of square when seleced changes? 
 
@@ -17,6 +17,41 @@ function App() {
       </button>
     );
   }
+
+  function calcRelation(start, end){
+
+  }
+
+  function calcActive(selected){
+    let adj = []; 
+    const rels = [[0,1] ,[1,0],[1,1],[-1,1]];
+    switch(selected.length){
+        case 0:         
+        
+        break;
+
+        case 1:
+          
+          const x = Number(selected[0][1]); 
+          const y = Number(selected[0][2]); 
+          
+          for(let rel of rels){
+            adj.push([x+rel[0], y+rel[1] ]);
+            adj.push([x-rel[0], y-rel[1]]);
+          }
+          
+        break;
+
+        default: //2 or more 
+          const start = selected[0]; 
+          const end = selected[-1];
+          const rel = calcRelation(start, end); 
+
+      }
+    return adj
+  }
+
+  
 
   function Board() {//{ xIsNext, squares, onPlay }
     // function handleClick(i) {
@@ -30,30 +65,33 @@ function App() {
     // }
 
    
- 
+                
     
 
-    const handleClick = (e)=>{
-      console.log(e.target)
-      console.log("x =" , e.target.dataset.x);
+    const handleClick = (e,adjacent)=>{
+      // console.log(e.target)
+      // console.log(adjacent)
+      
 
       const sData = [ e.value ,  e.target.dataset.x, e.target.dataset.y]
-     
-      switch(selected.length){
-        case 0:         
+      //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
+      if (adjacent.current.includes([Number(e.target.dataset.x), Number(e.target.dataset.y)]) || adjacent.current.length === 0){
         setSelected([...selected,sData]);
-        break;
-
-        case 1:
-
-        break;
-
-        default:
-
+      }else{
+        //flash red ? 
       }
+      
   }
+
+    const adjacent = useRef([]);
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
-    const rowCount = 12,   colCount = 10; 
+
+    useEffect(()=>{
+      adjacent.current = calcActive(selected);
+      //console.log(adjacent.current);
+    },[selected]);
+
+    const rowCount = 12,   colCount = 12; 
     return (
       <>
       <div>
@@ -63,7 +101,8 @@ function App() {
               {[...new Array(colCount)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={"A"}  x={xCord} y={rowIndex} selectFunc={handleClick} /> )} )}
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={"A"}  x={xCord} y={rowIndex} 
+                  selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
         })
