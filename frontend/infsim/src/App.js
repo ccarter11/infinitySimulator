@@ -73,9 +73,12 @@ function App() {
       // console.log(adjacent)
       
 
-      const sData = [ e.value ,  e.target.dataset.x, e.target.dataset.y]
+      const sData = [ e.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
       //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
-      if (adjacent.current.includes([Number(e.target.dataset.x), Number(e.target.dataset.y)]) || adjacent.current.length === 0){
+      console.log(sData[1],sData[2])
+      console.log(adjacent.current.includes([sData[1],sData[2]]))
+      if (adjacent.current.includes([sData[1], sData[2]]) || adjacent.current.length === 0){
+        console.log(true)
         setSelected([...selected,sData]);
       }else{
         //flash red ? 
