@@ -19,7 +19,12 @@ function App() {
   }
 
   function calcRelation(start, end){
+    const xDiff = start[0] - end[0]; 
+    const yDiff = start[1] - end[1];
+    //TODO: calc rel
+    let rel;
 
+    return rel;
   }
 
   function calcActive(selected){
@@ -49,6 +54,8 @@ function App() {
           const start = selected[0]; 
           const end = selected[-1];
           const rel = calcRelation(start, end); 
+          adj.push((x+rel[0]).toString()+'.'+(y+rel[1]));
+          adj.push((x-rel[0]).toString()+'.'+(y-rel[1]));
 
       }
     return adj
@@ -72,10 +79,6 @@ function App() {
     
 
     const handleClick = (e,adjacent)=>{
-      // console.log(e.target)
-      // console.log(adjacent)
-      
-
       const sData = [ e.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
       //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
       // console.log(sData[1],sData[2])
@@ -85,11 +88,12 @@ function App() {
       //   console.log(true)
       //   setSelected([...selected,sData]);
       if (adjacent.current.includes(cords) || adjacent.current.length === 0){
-        console.log(true)
+        
         setSelected([...selected,sData]);
       }else{
-        //flash red ? 
+        //TODO: signal invalid (ie red flash/shake)
       }
+      console.log(adjacent.current)
       
   }
 
@@ -102,6 +106,7 @@ function App() {
     },[selected]);
 
     const rowCount = 12,   colCount = 12; 
+
     return (
       <>
       <div>
@@ -111,7 +116,8 @@ function App() {
               {[...new Array(colCount)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={"A"}  x={xCord} y={rowIndex} 
+                  //TODO: add values from file 
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={"A"}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
