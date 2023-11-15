@@ -10,7 +10,6 @@ function App() {
     // if (selected.length ===1){  //hook to update state of square when seleced changes? 
 
     // }
-  
     return (
       <button className="square" value = {value} data-x = {x} data-y = {y} onClick={selectFunc} >
         {value}
@@ -19,17 +18,18 @@ function App() {
   }
 
   function calcRelation(start, end){
-    const xDiff = start[0] - end[0]; 
-    const yDiff = start[1] - end[1];
-    //TODO: calc rel
-    let rel;
-
-    return rel;
+    const xDiff = end[1] - start[1]; 
+    const yDiff = end[2] - start[2];
+    const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff);
+    const yNorm = yDiff===0? yDiff : yDiff / Math.abs(yDiff);
+    console.log(yNorm)
+    return [xNorm,yNorm];//rel
   }
 
   function calcActive(selected){
     let adj = []; 
     const rels = [[0,1] ,[1,0],[1,1],[-1,1]];
+
     switch(selected.length){
         case 0:         
         
@@ -51,11 +51,13 @@ function App() {
         break;
 
         default: //2 or more 
-          const start = selected[0]; 
-          const end = selected[-1];
+          const start = selected[0]; // xStart < xEnd
+          const end = selected[selected.length - 1];
+       
           const rel = calcRelation(start, end); 
-          adj.push((x+rel[0]).toString()+'.'+(y+rel[1]));
-          adj.push((x-rel[0]).toString()+'.'+(y-rel[1]));
+          console.log(rel)
+          adj.push((end[1]+rel[0]).toString()+'.'+(end[2]+rel[1]));// start <- -/backwards to get letter before
+          adj.push((start[1]-rel[0]).toString()+'.'+(start[2]-rel[1]));// end ->  +/forwards to get letter after 
 
       }
     return adj
@@ -74,12 +76,9 @@ function App() {
     //   onPlay(nextSquares);
     // }
 
-   
-                
-    
-
     const handleClick = (e,adjacent)=>{
-      const sData = [ e.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
+      const sData = [ e.target.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
+      console.log(adjacent.current)
       //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
       // console.log(sData[1],sData[2])
       // console.log(adjacent.current.includes([sData[1],sData[2]]))
@@ -88,19 +87,19 @@ function App() {
       //   console.log(true)
       //   setSelected([...selected,sData]);
       if (adjacent.current.includes(cords) || adjacent.current.length === 0){
-        
+        //TODO Sort selected by x cord 
         setSelected([...selected,sData]);
       }else{
         //TODO: signal invalid (ie red flash/shake)
+        console.log('invalid selection :(')
       }
-      console.log(adjacent.current)
-      
+            
   }
 
     const adjacent = useRef([]);
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
 
-    useEffect(()=>{
+    useEffect(()=>{      
       adjacent.current = calcActive(selected);
       //console.log(adjacent.current);
     },[selected]);
