@@ -4,12 +4,9 @@ import './App.css';
 
 function App() {
   
-  function Square({ value, x, y, selectFunc }) { 
+  function Square({ value, x, y, selectFunc }) { // TODO add a selected state/ data val for when square exists in selected array ? for highlighting after finding valid maybe change class name when selected ? 
    // const [state, setState] = useState(0);//ready/ active 
 
-    // if (selected.length ===1){  //hook to update state of square when seleced changes? 
-
-    // }
     return (
       <button className="square" value = {value} data-x = {x} data-y = {y} onClick={selectFunc} >
         {value}
@@ -20,7 +17,7 @@ function App() {
   function calcRelation(start, end){
     const xDiff = end[1] - start[1]; 
     const yDiff = end[2] - start[2];
-    const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff);
+    const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff); //avoid div by 0 
     const yNorm = yDiff===0? yDiff : yDiff / Math.abs(yDiff);
     console.log(yNorm)
     return [xNorm,yNorm];//rel
@@ -76,6 +73,8 @@ function App() {
     //   onPlay(nextSquares);
     // }
 
+    //dconst handle 
+
     const handleClick = (e,adjacent)=>{
       const sData = [ e.target.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
       console.log(adjacent.current)
@@ -87,7 +86,7 @@ function App() {
       //   console.log(true)
       //   setSelected([...selected,sData]);
       if (adjacent.current.includes(cords) || adjacent.current.length === 0){
-        //TODO Sort selected by x cord 
+        //TODO Sort selected by x cord function
         setSelected([...selected,sData]);
       }else{
         //TODO: signal invalid (ie red flash/shake)
@@ -104,7 +103,7 @@ function App() {
       //console.log(adjacent.current);
     },[selected]);
 
-    const rowCount = 12,   colCount = 12; 
+    const rowCount = 24,   colCount = 24; 
 
     return (
       <>
