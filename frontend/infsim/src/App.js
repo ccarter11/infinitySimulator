@@ -78,8 +78,8 @@ function App() {
 
     //--- event handlers ---
     const handleUndoClick = (e) => {
-      if(e.keyCode === 93){
-        setSelected(selected.pop())
+      if(e.keyCode === 8){
+        setSelected(selected.slice(0,selected.length))
       }
     }
 
@@ -112,7 +112,7 @@ function App() {
         document.removeEventListener('keydown' , handleUndoClick)
       }
     },[]);
-    
+
     useEffect(()=>{      
       adjacent.current = calcActive(selected);
       //console.log(adjacent.current);
