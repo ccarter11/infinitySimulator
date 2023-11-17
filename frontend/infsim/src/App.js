@@ -73,7 +73,15 @@ function App() {
     //   onPlay(nextSquares);
     // }
 
-    //dconst handle 
+    const adjacent = useRef([]);
+    const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
+
+    //--- event handlers ---
+    const handleUndoClick = (e) => {
+      if(e.keyCode === 93){
+        setSelected(selected.pop())
+      }
+    }
 
     const handleClick = (e,adjacent)=>{
       const sData = [ e.target.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
@@ -95,9 +103,16 @@ function App() {
             
   }
 
-    const adjacent = useRef([]);
-    const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
-
+  
+  // --- EFFECTS ---
+  
+    useEffect(()=>{
+      document.addEventListener('keydown',handleUndoClick);
+      return () => {
+        document.removeEventListener('keydown' , handleUndoClick)
+      }
+    },[]);
+    
     useEffect(()=>{      
       adjacent.current = calcActive(selected);
       //console.log(adjacent.current);
