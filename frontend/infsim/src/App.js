@@ -79,16 +79,17 @@ function App() {
     //--- event handlers ---
     const handleUndoClick = (e) => {
       if(e.keyCode === 8){
-        setSelected(selected.slice(0,selected.length))
+        console.log(selected)
+        setSelected(selected.slice(0,selected.length-1))
       }
+      console.log(selected)
     }
 
     const handleClick = (e,adjacent)=>{
       const sData = [ e.target.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
       console.log(adjacent.current)
       //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
-      // console.log(sData[1],sData[2])
-      // console.log(adjacent.current.includes([sData[1],sData[2]]))
+   
       const cords  = sData[1].toString() +'.' + sData[2].toString();
       // if (adjacent.current.includes([sData[1], sData[2]]) || adjacent.current.length === 0){
       //   console.log(true)
@@ -111,7 +112,7 @@ function App() {
       return () => {
         document.removeEventListener('keydown' , handleUndoClick)
       }
-    },[]);
+    },[selected]);
 
     useEffect(()=>{      
       adjacent.current = calcActive(selected);
@@ -119,6 +120,8 @@ function App() {
     },[selected]);
 
     const rowCount = 24,   colCount = 24; 
+
+
 
     return (
       <>
