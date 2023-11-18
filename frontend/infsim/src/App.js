@@ -74,9 +74,10 @@ function App() {
     // }
 
     const adjacent = useRef([]);
+    const letters = useRef( Array.from({ length: 10**2 }, () => String.fromCharCode(Math.floor(Math.random() * 26) + 65)))
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
 
-    //--- event handlers ---
+
     const handleUndoClick = (e) => {
       if(e.keyCode === 8){
         console.log(selected)
@@ -105,8 +106,6 @@ function App() {
   }
 
   
-  // --- EFFECTS ---
-  
     useEffect(()=>{
       document.addEventListener('keydown',handleUndoClick);
       return () => {
@@ -118,22 +117,26 @@ function App() {
       adjacent.current = calcActive(selected);
       //console.log(adjacent.current);
     },[selected]);
+    
 
-    const rowCount = 24,   colCount = 24; 
+    const n = 10;
+    
+    const count = n; 
 
-
-
+    //letters[rowIndex*n + colIndex]
+    
     return (
       <>
+      
       <div>
-        {[...new Array(rowCount)].map((x, rowIndex) => {
+        {[...new Array(count)].map((x, rowIndex) => {
           return (
             <div className="board-row" key={rowIndex}>
-              {[...new Array(colCount)].map((y, colIndex) => {  
+              {[...new Array(count)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
                   //TODO: add values from file 
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={"A"}  x={xCord} y={rowIndex}  
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
