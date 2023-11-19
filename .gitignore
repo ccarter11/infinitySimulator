@@ -14,15 +14,15 @@ backend/build/
 *.egg-info/
 
 # dependencies
-/frontend/infsim/node_modules
+/frontend/node_modules
 .pnp
 .pnp.js
 
 # testing
-/frontend/infsim//coverage
+/frontend//coverage
 
 # production
-/frontend/infsim//build
+/frontend//build
 
 # misc
 .DS_Store
@@ -31,6 +31,6 @@ backend/build/
 .env.test.local
 .env.production.local
 
-/frontend/infsim/npm-debug.log*
-/frontend/infsim/yarn-debug.log*
-/frontend/infsim/yarn-error.log*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*

@@ -3,7 +3,7 @@ import './App.css';
 
 
 function App() {
-  
+ 
   function Square({ value, x, y, selectFunc }) { // TODO add a selected state/ data val for when square exists in selected array ? for highlighting after finding valid maybe change class name when selected ? 
    // const [state, setState] = useState(0);//ready/ active 
 
@@ -63,16 +63,20 @@ function App() {
   
 
   function Board() {//{ xIsNext, squares, onPlay }
-    // function handleClick(i) {
-    //   const nextSquares = squares.slice();
-    //   if (xIsNext) {
-    //     nextSquares[i] = 'X';
-    //   } else {
-    //     nextSquares[i] = 'O';
-    //   }
-    //   onPlay(nextSquares);
-    // }
 
+    const [board_letters, setBoard] = useState([]); 
+    useEffect(() => {
+      // Using fetch to fetch the api from 
+      // flask server it will be redirected to proxy
+      fetch("/data").then((res) =>
+          res.json().then((data) => {
+              // Setting a data from api
+              setBoard(data);
+          })
+      );
+  }, []);
+    
+  
     const adjacent = useRef([]);
     const letters = useRef( Array.from({ length: 10**2 }, () => String.fromCharCode(Math.floor(Math.random() * 26) + 65)))
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
@@ -119,24 +123,22 @@ function App() {
     },[selected]);
     
 
-    const n = 10;
+   
     
-    const count = n; 
-
-    //letters[rowIndex*n + colIndex]
-    
+    const n = 10; 
+  
     return (
       <>
       
       <div>
-        {[...new Array(count)].map((x, rowIndex) => {
+        {[...new Array(n)].map((x, rowIndex) => {
           return (
             <div className="board-row" key={rowIndex}>
-              {[...new Array(count)].map((y, colIndex) => {  
+              {[...new Array(n)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
                   //TODO: add values from file 
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={board_letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
