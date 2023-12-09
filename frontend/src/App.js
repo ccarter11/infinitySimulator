@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import './App.css';
+import './style.scss';
+//import './App.css'
 
 
 function App() {
@@ -15,6 +16,14 @@ function App() {
   }
 
   function calcRelation(start, end){
+    /* 
+      summary:
+          Calculates the 
+      args:
+
+      returns: 
+      
+    */
     const xDiff = end[1] - start[1]; 
     const yDiff = end[2] - start[2];
     const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff); //avoid div by 0 
@@ -24,15 +33,23 @@ function App() {
   }
 
   function calcActive(selected){
+       /* 
+      summary:
+
+      args:
+
+      returns: 
+      
+    */
     let adj = []; 
     const rels = [[0,1] ,[1,0],[1,1],[-1,1]];
 
     switch(selected.length){
-        case 0:         
+        case 0: //none selected, all options are valid    
         
         break;
 
-        case 1:
+        case 1: //1 selected, all adjacent options are valid
           
           const x = Number(selected[0][1]); 
           const y = Number(selected[0][2]); 
@@ -47,7 +64,7 @@ function App() {
           
         break;
 
-        default: //2 or more 
+        default: //2 or more selected, only selections in the defined line are valid
           const start = selected[0]; // xStart < xEnd
           const end = selected[selected.length - 1];
        
@@ -62,7 +79,7 @@ function App() {
 
   
 
-  function Board() {//{ xIsNext, squares, onPlay }
+  function Board() {
 
     const [board_letters, setBoard] = useState([]); 
     useEffect(() => {
@@ -78,7 +95,6 @@ function App() {
     
   
     const adjacent = useRef([]);
-    const letters = useRef( Array.from({ length: 10**2 }, () => String.fromCharCode(Math.floor(Math.random() * 26) + 65)))
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord
 
 
@@ -130,20 +146,22 @@ function App() {
     return (
       <>
       
-      <div>
+      <div className='board'>
+        <div className='chunk'>
         {[...new Array(n)].map((x, rowIndex) => {
           return (
             <div className="board-row" key={rowIndex}>
               {[...new Array(n)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
-                  //TODO: add values from file 
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={board_letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
+                  //TODO: add values from file   board_letters[colIndex*n + rowIndex]
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={'A'}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
         })
         }
+        </div>
     </div>
     <div> 
       {selected}
@@ -154,9 +172,9 @@ function App() {
 
   return (
     <div className="App">
-       <div className="game-board">
+       {/* <div className="game-board"> */}
         <Board />
-      </div>
+      {/* </div> */}
     </div>
   );
 }
