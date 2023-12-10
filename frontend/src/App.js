@@ -82,6 +82,7 @@ function App() {
   function Board() {
 
     const [board_letters, setBoard] = useState([]); 
+
     useEffect(() => {
       // Using fetch to fetch the api from 
       // flask server it will be redirected to proxy
@@ -155,7 +156,7 @@ function App() {
                 const xCord = colIndex;
                 return(
                   //TODO: add values from file   board_letters[colIndex*n + rowIndex]
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={'A'}  x={xCord} y={rowIndex}  
+                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={ board_letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
           )
