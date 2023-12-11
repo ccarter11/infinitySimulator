@@ -13,7 +13,7 @@ import Square from './square';
     */
 
 export default function Chunk({id,n,handleClick,adjacent}) {
-    
+    // fetch chunk data on initial load
     const [letters, setLetters] = useState([]);
     useEffect(() => {
       fetch("/data").then((res) =>
@@ -24,6 +24,7 @@ export default function Chunk({id,n,handleClick,adjacent}) {
   }, []);
     
   return (
+    //populate n x n buttons with letters
     <div className='chunk'>
         {[...new Array(n)].map((x, rowIndex) => {
           return (
@@ -31,7 +32,6 @@ export default function Chunk({id,n,handleClick,adjacent}) {
               {[...new Array(n)].map((y, colIndex) => {  
                 const xCord = colIndex;
                 return(
-                  //TODO: add values from file   board_letters[colIndex*n + rowIndex]
                   <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={ letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
                   selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
             </div>
