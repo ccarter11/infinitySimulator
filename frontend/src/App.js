@@ -59,9 +59,7 @@ function App() {
             // adj.push([x-rel[0], y-rel[1]]);
             adj.push((x+rel[0]).toString()+'.'+(y+rel[1]));
             adj.push((x-rel[0]).toString()+'.'+(y-rel[1]));
-            
-          }
-          
+          } 
         break;
 
         default: //2 or more selected, only selections in the defined line are valid
@@ -81,18 +79,18 @@ function App() {
 
   function Board() {
 
-    const [board_letters, setBoard] = useState([]); 
+  //   const [board_letters, setBoard] = useState([]); //move to chunk, 
 
-    useEffect(() => {
-      // Using fetch to fetch the api from 
-      // flask server it will be redirected to proxy
-      fetch("/data").then((res) =>
-          res.json().then((data) => {
-              // Setting a data from api
-              setBoard(data);
-          })
-      );
-  }, []);
+  //   useEffect(() => {
+  //     // Using fetch to fetch the api from 
+  //     // flask server it will be redirected to proxy
+  //     fetch("/data").then((res) =>
+  //         res.json().then((data) => {
+  //             // Setting a data from api
+  //             setBoard(data);
+  //         })
+  //     );
+  // }, []);
     
   
     const adjacent = useRef([]);
@@ -101,10 +99,8 @@ function App() {
 
     const handleUndoClick = (e) => {
       if(e.keyCode === 8){
-        console.log(selected)
         setSelected(selected.slice(0,selected.length-1))
       }
-      console.log(selected)
     }
 
     const handleClick = (e,adjacent)=>{
@@ -148,7 +144,7 @@ function App() {
       <>
       
       <div className='board'>
-        <div className='chunk'>
+        {/* <div className='chunk'>
         {[...new Array(n)].map((x, rowIndex) => {
           return (
             <div className="board-row" key={rowIndex}>
@@ -162,7 +158,7 @@ function App() {
           )
         })
         }
-        </div>
+        </div> */}
     </div>
     <div> 
       {selected}
