@@ -9,8 +9,8 @@ app = Flask(__name__)
 @app.route('/data')
 def get_letters():
     alphabet = string.ascii_uppercase
-    n = 100
-    letters = random.choices(alphabet, k=n)
+    n = 64
+    letters = random.choices(alphabet, k=n*n)
 	
     return letters
 

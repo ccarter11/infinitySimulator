@@ -1,30 +1,47 @@
+:root{
+    --dim: calc(100/32)%;
+}
 div.board{
     background-color: azure;
-    height: 100%;
+    height: 100svh;
+    width: 70svw;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    
+}::-webkit-scrollbar{
+   
+   width: 0;
+   height: 0;
 }
 div.chunk{
     background-color: pink;
     border: 1px solid black;
-    height:800px;
-    width:800px;
+    height: 1000px;
+    width: 1000px;
     padding:0px;
     display: flex;
     flex-wrap: wrap;
 }
+.dashBoard{
+    background-color: darkgrey;
+    width: 30svw;
+    overflow: hidden;
+}
 .App{
     text-align: center;
+   display: flex;
     
 }
-div.App{
-    height: 100vh;
-}
+// div.App{
+//     height: 100vh;
+// }
 div.board-row{
     width:100%;
-    height: 10%;
+    height: 6.25%;
 }
 button.square{
     background-color: whitesmoke;
-    width:  10%;
+    width: 6.25%;
     height: 100%;
     border-radius:5px;
 

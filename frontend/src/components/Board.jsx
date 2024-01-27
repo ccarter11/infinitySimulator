@@ -1,10 +1,11 @@
 import {useState, useEffect, useRef} from 'react'
 import Chunk from './Chunk'
  /* 
-    9x9 chunks, virtualized, load/unload as user moves, pan-able    
+    TODO :
+     - 9x9 chunks, virtualized, load/unload as user moves, pan-able    
+     - 
 */
-    export default function Board() {
-        const n = 10 
+    export default function Board() { //add n to param 
 
         
     function calcRelation(start, end){
@@ -31,14 +32,15 @@ import Chunk from './Chunk'
     function calcActive(selected){
             /* 
         summary:
-
+            define list of valid button selections based on adjacency
         args:
-
+            selects: cords of selected letters
         returns: 
+            adj: the cord options for the next possible selection
         
         */
 
-        //TODO:: fix direction change bug for default case -- maybe based on lack of sorting?? 
+        //TODO:: fix direction change bug for default case -- maybe based on lack of sorting?? add to front if <  add to end if > 
         let adj = []; 
         const rels = [[0,1] ,[1,0],[1,1],[-1,1]];
 
@@ -74,9 +76,10 @@ import Chunk from './Chunk'
         return adj
     }
 
+
     const adjacent = useRef([]); //legal selections
     const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
-
+    const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
 
     const handleUndoClick = (e) => {
         if(e.keyCode === 8){
@@ -120,7 +123,7 @@ import Chunk from './Chunk'
   return (
     <>
     <div className='board'>
-        <Chunk id ={1} n = {n} handleClick={handleClick} adjacent={adjacent} />
+        <Chunk id ={1} handleClick={handleClick} adjacent={adjacent} />
     </div>
     <div className='test'>
         {selected}

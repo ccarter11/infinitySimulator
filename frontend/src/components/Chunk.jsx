@@ -12,17 +12,20 @@ import Square from './square';
             Chunk
     */
 
-export default function Chunk({id,n,handleClick,adjacent}) {
-    // fetch chunk data on initial load
-    const [letters, setLetters] = useState([]);
-    useEffect(() => {
-      fetch("/data").then((res) =>
-          res.json().then((data) => {
-              setLetters(data);
-          })
-      );
-  }, []);
-    
+  export default function Chunk({id,handleClick,adjacent}) {
+      // fetch chunk data on initial load
+      const [letters, setLetters] = useState([]);
+      useEffect(() => {
+        fetch("/data").then((res) =>
+            res.json().then((data) => {
+                setLetters(data);
+            })
+        );
+    }, []);
+  
+  const n  = Math.sqrt(letters.length)
+  console.log('n' , n )
+  
   return (
     //populate n x n buttons with letters
     <div className='chunk'>
