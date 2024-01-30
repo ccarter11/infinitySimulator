@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function DashBoard() {
+export default function DashBoard({selected}) {
   return (
-    <div className='dashBoard'>DashBoard</div>
+    <div className='dashBoard'>{selected}</div>
   )
 }

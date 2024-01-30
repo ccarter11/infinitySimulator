@@ -169,11 +169,13 @@ function App() {
   //   );
   // }
 
+  const [selected, setSelected] = useState([]);
+
   return (
     <div className="App">
        {/* <div className="game-board"> */}
-        <Board />
-        <Dashboard />
+        <Board selected={selected} setSelected={setSelected}/>
+        <Dashboard selected={selected} />
       {/* </div> */}
     </div>
   );

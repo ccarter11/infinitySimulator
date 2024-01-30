@@ -5,7 +5,7 @@ import Chunk from './Chunk'
      - 9x9 chunks, virtualized, load/unload as user moves, pan-able    
      - 
 */
-    export default function Board() { //add n to param 
+export default function Board({selected,setSelected}) { //add n to param 
 
         
     function calcRelation(start, end){
@@ -78,8 +78,8 @@ import Chunk from './Chunk'
 
 
     const adjacent = useRef([]); //legal selections
-    const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
-    const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
+    //const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
+  //  const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
 
     const handleUndoClick = (e) => {
         if(e.keyCode === 8){
@@ -124,9 +124,6 @@ import Chunk from './Chunk'
     <>
     <div className='board'>
         <Chunk id ={1} handleClick={handleClick} adjacent={adjacent} />
-    </div>
-    <div className='test'>
-        {selected}
     </div>
     </>
     );
