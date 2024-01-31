@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function DashBoard({selected}) {
+    const getLetters = (x) =>{ return x[0]
+    }
+    const letters = selected.map(getLetters)
   return (
-    <div className='dashBoard'>{selected}</div>
+    <div className='dashBoard'>{letters}</div>
   )
 }

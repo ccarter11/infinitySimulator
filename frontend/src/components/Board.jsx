@@ -55,7 +55,7 @@ export default function Board({selected,setSelected}) { //add n to param
             const y = Number(selected[0][2]); 
             
             for(let rel of rels){
-                //TODO change strings to arrays
+                //TODO change strings to arrays or obj
                 // adj.push([x+rel[0], y+rel[1] ]);
                 // adj.push([x-rel[0], y-rel[1]]);
                 adj.push((x+rel[0]).toString()+'.'+(y+rel[1]));
