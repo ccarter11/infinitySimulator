@@ -3,7 +3,7 @@ import Chunk from './Chunk'
  /* 
     TODO :
      - 9x9 chunks, virtualized, load/unload as user moves, pan-able    
-     - 
+     - change s/a/r descriptions 
 */
 export default function Board({selected,setSelected}) { //add n to param 
 
@@ -117,7 +117,6 @@ export default function Board({selected,setSelected}) { //add n to param
     useEffect(()=>{      
         adjacent.current = calcActive(selected);
     },[selected]);
-
 
 
   return (

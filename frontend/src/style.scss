@@ -3,7 +3,7 @@
 }
 div.board{
     background-color: azure;
-    height: 100svh;
+    height: 70svw;
     width: 70svw;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -13,14 +13,16 @@ div.board{
    width: 0;
    height: 0;
 }
-div.chunk{
+//TODO: eliminate spaces between rows -? set square h/w, set row h/w to fit square.
+div.chunk{ 
     background-color: pink;
-    border: 1px solid black;
-    height: 1000px;
-    width: 1000px;
-    padding:0px;
+    // border: 1px solid black;
+    height:    2000px;
+    width: 2000px;
+    // padding:10px;
     display: flex;
     flex-wrap: wrap;
+    
 }
 .dashBoard{
     background-color: darkgrey;
@@ -37,12 +39,18 @@ div.chunk{
 // }
 div.board-row{
     width:100%;
-    height: 6.25%;
+    height:  1.5625%;
+    margin-bottom: 2px;
+    margin-top: 2px;
 }
 button.square{
-    background-color: whitesmoke;
-    width: 6.25%;
+    background-color: white;
+    width: 1.5625%;
     height: 100%;
     border-radius:5px;
+    margin-left:2px;
+    margin-right: 2px;
+
+    
 
 }
