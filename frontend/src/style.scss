@@ -13,14 +13,14 @@ div.board{
    width: 0;
    height: 0;
 }
-//TODO: eliminate spaces between rows -? set square h/w, set row h/w to fit square.
+//TODO: eliminate spaces between rows -? set square h/w, set row h/w to fit square.  grid 
 div.chunk{ 
     background-color: pink;
     // border: 1px solid black;
     height:    2000px;
     width: 2000px;
     // padding:10px;
-    display: flex;
+    display: flex;  // -->grid 
     flex-wrap: wrap;
     
 }

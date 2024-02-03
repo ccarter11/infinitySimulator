@@ -9,18 +9,7 @@ export default function Board({selected,setSelected}) { //add n to param
 
         
     function calcRelation(start, end){
-        /* 
-        summary:
-            Calculates the direction of the line of letters currently selected
-        args:
-                start: cords of first letter
-                end: cords of last letter
-
-        returns: 
-                the relation, 'rel', that the current word follows
-                (horizontal ->  1 , 0 / vertical -> 0 , 1 / left diagonal -> 1 , 1 / right diagonal -> -1 , 1)
-        
-        */
+      
         const xDiff = end[1] - start[1]; 
         const yDiff = end[2] - start[2];
         const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff); //avoid div by 0 
@@ -30,15 +19,6 @@ export default function Board({selected,setSelected}) { //add n to param
     }
 
     function calcActive(selected){
-            /* 
-        summary:
-            define list of valid button selections based on adjacency
-        args:
-            selects: cords of selected letters
-        returns: 
-            adj: the cord options for the next possible selection
-        
-        */
 
         //TODO:: fix direction change bug for default case -- maybe based on lack of sorting?? add to front if <  add to end if > 
         let adj = []; 
