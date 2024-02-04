@@ -1,18 +1,7 @@
 import {useEffect,useState} from 'react'
 import Square from './square';
- /* 
-      summary:
-            n x n unit of Squares
-      args:
-            id: chunk id number
-            n: height and width of Chunk
-            handleClick: function that handles the selection of a Square
-            adjacent: state array of legal selections
-      returns: 
-            Chunk
-    */
 
-  export default function Chunk({id,handleClick,adjacent}) {
+export default function Chunk({id,handleClick,adjacent}) {
       // fetch chunk data on initial load
       const [letters, setLetters] = useState([]);
       useEffect(() => {

@@ -3,24 +3,13 @@ import Chunk from './Chunk'
  /* 
     TODO :
      - 9x9 chunks, virtualized, load/unload as user moves, pan-able    
-     - 
+     - change s/a/r descriptions 
 */
-    export default function Board() { //add n to param 
+export default function Board({selected,setSelected}) { //add n to param 
 
         
     function calcRelation(start, end){
-        /* 
-        summary:
-            Calculates the direction of the line of letters currently selected
-        args:
-                start: cords of first letter
-                end: cords of last letter
-
-        returns: 
-                the relation, 'rel', that the current word follows
-                (horizontal ->  1 , 0 / vertical -> 0 , 1 / left diagonal -> 1 , 1 / right diagonal -> -1 , 1)
-        
-        */
+      
         const xDiff = end[1] - start[1]; 
         const yDiff = end[2] - start[2];
         const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff); //avoid div by 0 
@@ -30,15 +19,6 @@ import Chunk from './Chunk'
     }
 
     function calcActive(selected){
-            /* 
-        summary:
-            define list of valid button selections based on adjacency
-        args:
-            selects: cords of selected letters
-        returns: 
-            adj: the cord options for the next possible selection
-        
-        */
 
         //TODO:: fix direction change bug for default case -- maybe based on lack of sorting?? add to front if <  add to end if > 
         let adj = []; 
@@ -55,7 +35,7 @@ import Chunk from './Chunk'
             const y = Number(selected[0][2]); 
             
             for(let rel of rels){
-                //TODO change strings to arrays
+                //TODO change strings to arrays or obj
                 // adj.push([x+rel[0], y+rel[1] ]);
                 // adj.push([x-rel[0], y-rel[1]]);
                 adj.push((x+rel[0]).toString()+'.'+(y+rel[1]));
@@ -78,8 +58,8 @@ import Chunk from './Chunk'
 
 
     const adjacent = useRef([]); //legal selections
-    const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
-    const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
+    //const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
+  //  const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
 
     const handleUndoClick = (e) => {
         if(e.keyCode === 8){
@@ -119,14 +99,10 @@ import Chunk from './Chunk'
     },[selected]);
 
 
-
   return (
     <>
     <div className='board'>
         <Chunk id ={1} handleClick={handleClick} adjacent={adjacent} />
-    </div>
-    <div className='test'>
-        {selected}
     </div>
     </>
     );

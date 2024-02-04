@@ -5,11 +5,11 @@ import string
 
 app = Flask(__name__)
 
-
+#parallel process word front , back and in each language
 @app.route('/data')
 def get_letters():
     alphabet = string.ascii_uppercase
-    n = 64
+    n = 32
     letters = random.choices(alphabet, k=n*n)
 	
     return letters
