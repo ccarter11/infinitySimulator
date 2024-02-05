@@ -21,6 +21,8 @@ export default function Board({selected,setSelected}) { //add n to param
     function calcActive(selected){
 
         //TODO:: fix direction change bug for default case -- maybe based on lack of sorting?? add to front if <  add to end if > 
+        //... priority q where priorty = order selected and order in queue = least to greatest irt x cord ? remove highest priority more efficient with linked list
+        
         let adj = []; 
         const rels = [[0,1] ,[1,0],[1,1],[-1,1]];
 
@@ -79,6 +81,7 @@ export default function Board({selected,setSelected}) { //add n to param
         if (adjacent.current.includes(cords) || adjacent.current.length === 0){
             //TODO Sort selected by x cord function
             setSelected([...selected,sData]);
+            
         }else{
             //TODO: signal invalid (ie red flash/shake)
             console.log('invalid selection :(')

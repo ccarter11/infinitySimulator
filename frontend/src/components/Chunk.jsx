@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react'
-import Square from './square';
+import Square from './Square';
 
 export default function Chunk({id,handleClick,adjacent}) {
       // fetch chunk data on initial load
@@ -12,24 +12,18 @@ export default function Chunk({id,handleClick,adjacent}) {
         );
     }, []);
   
+  let squares = [];
   const n  = Math.sqrt(letters.length)
-  console.log('n' , n )
-  
+  for (let colIndex = 0; colIndex<n; colIndex++){
+    for(let rowIndex = 0; rowIndex<n; rowIndex++){
+            squares.push(<Square key ={colIndex.toString() +"."+rowIndex.toString()} value={ letters[colIndex*n + rowIndex]}  x={colIndex} y={rowIndex}  
+            selectFunc={(e)=>handleClick(e,adjacent)} /> )
+
+}}
   return (
     //populate n x n buttons with letters
     <div className='chunk'>
-        {[...new Array(n)].map((x, rowIndex) => {
-          return (
-            <div className="board-row" key={rowIndex}>
-              {[...new Array(n)].map((y, colIndex) => {  
-                const xCord = colIndex;
-                return(
-                  <Square key ={colIndex.toString() +"."+rowIndex.toString()} value={ letters[colIndex*n + rowIndex]}  x={xCord} y={rowIndex}  
-                  selectFunc={(e)=>handleClick(e,adjacent)} /> )} )}
-            </div>
-          )
-        })
-        }
+        {squares}
     </div>
   )
 }
