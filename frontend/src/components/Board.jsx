@@ -7,14 +7,13 @@ import Chunk from './Chunk'
 */
 export default function Board({selected,setSelected}) { //add n to param 
 
-        
     function calcRelation(start, end){
       
         const xDiff = end[1] - start[1]; 
         const yDiff = end[2] - start[2];
         const xNorm = xDiff===0? xDiff : xDiff / Math.abs(xDiff); //avoid div by 0 
         const yNorm = yDiff===0? yDiff : yDiff / Math.abs(yDiff);
-        console.log(yNorm)
+    //console.log(yNorm)
         return [xNorm,yNorm];//rel
     }
 
@@ -50,7 +49,7 @@ export default function Board({selected,setSelected}) { //add n to param
             const end = selected[selected.length - 1];
             
             const rel = calcRelation(start, end); 
-            console.log(rel)
+            //console.log(rel)
             adj.push((end[1]+rel[0]).toString()+'.'+(end[2]+rel[1]));// start <- -/backwards to get letter before
             adj.push((start[1]-rel[0]).toString()+'.'+(start[2]-rel[1]));// end ->  +/forwards to get letter after 
 
@@ -58,34 +57,53 @@ export default function Board({selected,setSelected}) { //add n to param
         return adj
     }
 
+    const [order, setOrder] = useState([]) // order added, used to determine which selected element to remove first 
 
     const adjacent = useRef([]); //legal selections
     //const [selected, setSelected] = useState([]); // array of selected letters, sorted by x cord 
   //  const [chunks, setChunks] = useState([]) // n x n array of chunk ids 
 
+    //add handleClearClick (shift + backspace) to remove all selected
     const handleUndoClick = (e) => {
         if(e.keyCode === 8){
-            setSelected(selected.slice(0,selected.length-1))
+
+            if(order[0] > order[order.length-1]){//remove from front
+                setOrder(order.slice(1,order.length));
+                setSelected(selected.slice(1,selected.length));
+                }
+            else {
+                setOrder(order.slice(0,order.length-1));
+                setSelected(selected.slice(0,selected.length-1));}
         }
     }
 
     const handleClick = (e,adjacent)=>{
         const sData = [ e.target.value , Number(e.target.dataset.x), Number(e.target.dataset.y)]
-        console.log(adjacent.current)
+        //console.log(adjacent.current)
         //const sData = {value:e.value , x:e.target.dataset.x , y:e.target.dataset.y}
 
         const cords  = sData[1].toString() +'.' + sData[2].toString();
         // if (adjacent.current.includes([sData[1], sData[2]]) || adjacent.current.length === 0){
-        //   console.log(true)
         //   setSelected([...selected,sData]);
         if (adjacent.current.includes(cords) || adjacent.current.length === 0){
             //TODO Sort selected by x cord function
-            setSelected([...selected,sData]);
+            
+            // if none selected or if x cord > biggest selected x cord or y cord > biggest selected y cord -> add to end
+            if(selected.length === 0 || sData[1]>selected[selected.length-1][1] || sData[2]>selected[selected.length-1][2]){
+                
+                setOrder([...order,order.length]);
+                setSelected([...selected,sData]);
+            }else{ // add to front
+                setOrder([order.length, ...order]);
+                setSelected([sData,...selected])
+            }
+            
             
         }else{
             //TODO: signal invalid (ie red flash/shake)
             console.log('invalid selection :(')
         }
+      
                 
     }
 
