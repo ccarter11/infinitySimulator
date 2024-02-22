@@ -166,6 +166,8 @@ export default function Board({selected,setSelected}) { //add n to param
     
         adjacent.current = calcActive(selected);
     },[selected]);
+        // any continuous path valid even if not line ?
+    //TODO: add select state to square -> use to change color / / deselect by clicking -> remove item with correspond cords: if at start or end -> delete / if in middle clear all selected
   return (
     <div className='board'>
         <Chunk id ={1} handleClick={handleClick} adjacent={adjacent} />

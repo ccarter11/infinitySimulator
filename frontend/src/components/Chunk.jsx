@@ -20,6 +20,7 @@ export default function Chunk({id,handleClick,adjacent}) {
             squares.push(<Square key ={colIndex.toString() +"."+rowIndex.toString()} value={ letters[colIndex*n + rowIndex]}  x={colIndex} y={rowIndex}  
             selectFunc={(e) => handleClick(e,adjacent)} /> )
 }}
+
   return (
         <div className='chunk'>
         {squares}

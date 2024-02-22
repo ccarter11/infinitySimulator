@@ -1,12 +1,32 @@
-
+import { useEffect, useState } from "react"
 
 export default function DashBoard({selected}) {
-    const getLetters = (x) =>{return x[0]}
-    
-    const letters = selected.map(getLetters)
+
+    const letters = selected.map((x) =>{return x[0]})
+    const [disable,setDisable] = useState(1)
+
+    useEffect(()=>{
+      if (selected.length>=3){
+        setDisable(0)
+      }else{
+        setDisable(1)
+      }
+    },[selected])
+
   return (
     <div className='dashBoard'>
+      <div className="entry">
         {letters}
+        <button className="enter" disabled={disable} >
+          Enter
+        </button>
+      </div>
+        
+        {/* 
+        nav (-> personal/global stats, analytics, account . . .)
+        entry (-> selected letters , submit button )
+        sessionStats (-> recently found words, total session score)
+         */}
     </div>
   )
 }
