@@ -16,7 +16,7 @@ export default function DashBoard({selected}) {
   return (
     <div className='dashBoard'>
       <div className="entry">
-        {letters}
+        <div>{letters}</div>
         <button className="enter" disabled={disable} >
           Enter
         </button>
